@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "anyobservableobject",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MarkParker5/AnyObservableObject",
+      "state" : {
+        "branch" : "master",
+        "revision" : "7b572f92e58fd05d1720e4b70a009297bb8f6d8d"
+      }
+    }
+  ],
+  "version" : 2
+}
