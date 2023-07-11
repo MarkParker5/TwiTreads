@@ -12,6 +12,6 @@ struct SettingsView: View {
     @AnyStateObject var presenter: any SettingsPresenter
     
     var body: some View {
-        Text("Settings View")
+        Text("TODO: login to accounts")
     }
 }

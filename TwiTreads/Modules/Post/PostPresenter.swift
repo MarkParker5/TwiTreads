@@ -8,9 +8,46 @@
 import Foundation
 
 protocol PostPresenter: AnyObservableObject {
+ 
+    var text: String { get set }
     
+    var isTwitterOn: Bool { get set }
+    
+    var isThreadsOn: Bool { get set }
+    
+    func onPostTap()
 }
 
 class PostPresenterImpl: PostPresenter, ObservableObject {
     
+    struct Dependencies {
+        let postServiceProvider: PostServiceProvider
+    }
+    
+    init(dependencies: Dependencies) {
+        self.dependencies = dependencies
+    }
+    
+    @Published var text: String = ""
+    
+    @Published var isThreadsOn: Bool = true
+    
+    @Published var isTwitterOn: Bool = true
+    
+    func onPostTap() {
+        if isThreadsOn {
+            Task {
+                try? await dependencies.postServiceProvider.twitterService.post(message: text)
+            }
+        }
+        if isTwitterOn {
+            Task {
+                try? await dependencies.postServiceProvider.threadsService.post(message: text)
+            }
+        }
+    }
+    
+    // MARK: private
+    
+    private let dependencies: Dependencies
 }

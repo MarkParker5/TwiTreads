@@ -14,7 +14,15 @@ protocol AppCoordinator {
 final class AppCoordinatorImpl: AppCoordinator {
     
     init() {
-        
+        diContainer.register(
+            type: PostServiceProvider.self,
+            component: PostServiceProviderImpl(
+                dependencies: .init(
+                    twitterService: PostServiceTwitter(),
+                    threadsService: PostServiceThreads()
+                )
+            )
+        )
     }
     
     lazy var presentersFactory: PresentersFactory = PresentersFactoryImpl(diContainer: diContainer)

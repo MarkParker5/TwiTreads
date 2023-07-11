@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F4ED8922A5D4C2C00975BE9 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED8912A5D4C2C00975BE9 /* PostService.swift */; };
+		8F4ED8942A5D4C6400975BE9 /* PostServiceTwitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED8932A5D4C6400975BE9 /* PostServiceTwitter.swift */; };
+		8F4ED8962A5D4C6B00975BE9 /* PostServiceThreads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED8952A5D4C6B00975BE9 /* PostServiceThreads.swift */; };
+		8F4ED89A2A5D4CA600975BE9 /* PostServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED8992A5D4CA600975BE9 /* PostServiceProvider.swift */; };
+		8F4ED89C2A5D4CBF00975BE9 /* PostServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */; };
 		8FD74D782A5D359100899983 /* TwiTreadsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD74D772A5D359100899983 /* TwiTreadsApp.swift */; };
 		8FD74D7C2A5D359100899983 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FD74D7B2A5D359100899983 /* Assets.xcassets */; };
 		8FD74D802A5D359100899983 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FD74D7F2A5D359100899983 /* Preview Assets.xcassets */; };
-		8FD74DA42A5D36DD00899983 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FD74DA32A5D36DD00899983 /* Info.plist */; };
 		8FD74DAD2A5D374500899983 /* PresentersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD74DAC2A5D374500899983 /* PresentersFactory.swift */; };
 		8FD74DAF2A5D374B00899983 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD74DAE2A5D374B00899983 /* DIContainer.swift */; };
 		8FD74DB12A5D378400899983 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD74DB02A5D378400899983 /* AppCoordinator.swift */; };
@@ -29,6 +33,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F4ED8912A5D4C2C00975BE9 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		8F4ED8932A5D4C6400975BE9 /* PostServiceTwitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceTwitter.swift; sourceTree = "<group>"; };
+		8F4ED8952A5D4C6B00975BE9 /* PostServiceThreads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceThreads.swift; sourceTree = "<group>"; };
+		8F4ED8992A5D4CA600975BE9 /* PostServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceProvider.swift; sourceTree = "<group>"; };
+		8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceMock.swift; sourceTree = "<group>"; };
 		8FD74D742A5D359100899983 /* TwiTreads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwiTreads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FD74D772A5D359100899983 /* TwiTreadsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwiTreadsApp.swift; sourceTree = "<group>"; };
 		8FD74D7B2A5D359100899983 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,6 +72,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F4ED88F2A5D4BFC00975BE9 /* PostService */ = {
+			isa = PBXGroup;
+			children = (
+				8F4ED8912A5D4C2C00975BE9 /* PostService.swift */,
+				8F4ED8932A5D4C6400975BE9 /* PostServiceTwitter.swift */,
+				8F4ED8952A5D4C6B00975BE9 /* PostServiceThreads.swift */,
+				8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */,
+			);
+			path = PostService;
+			sourceTree = "<group>";
+		};
+		8F4ED8972A5D4C9000975BE9 /* PostServiceFactory */ = {
+			isa = PBXGroup;
+			children = (
+				8F4ED8992A5D4CA600975BE9 /* PostServiceProvider.swift */,
+			);
+			path = PostServiceFactory;
+			sourceTree = "<group>";
+		};
 		8FD74D6B2A5D359000899983 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +200,8 @@
 		8FD74DB22A5D37EB00899983 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8F4ED88F2A5D4BFC00975BE9 /* PostService */,
+				8F4ED8972A5D4C9000975BE9 /* PostServiceFactory */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -259,7 +289,6 @@
 			files = (
 				8FD74D802A5D359100899983 /* Preview Assets.xcassets in Resources */,
 				8FD74D7C2A5D359100899983 /* Assets.xcassets in Resources */,
-				8FD74DA42A5D36DD00899983 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,10 +302,15 @@
 				8FD74DCA2A5D447300899983 /* FeedPresenter.swift in Sources */,
 				8FD74DB82A5D391B00899983 /* RootPresenter.swift in Sources */,
 				8FD74DC22A5D436200899983 /* TabBarView.swift in Sources */,
+				8F4ED8942A5D4C6400975BE9 /* PostServiceTwitter.swift in Sources */,
+				8F4ED8922A5D4C2C00975BE9 /* PostService.swift in Sources */,
+				8F4ED89C2A5D4CBF00975BE9 /* PostServiceMock.swift in Sources */,
 				8FD74DB12A5D378400899983 /* AppCoordinator.swift in Sources */,
 				8FD74DBE2A5D414600899983 /* Imports.swift in Sources */,
 				8FD74DC82A5D446E00899983 /* FeedView.swift in Sources */,
 				8FD74D782A5D359100899983 /* TwiTreadsApp.swift in Sources */,
+				8F4ED89A2A5D4CA600975BE9 /* PostServiceProvider.swift in Sources */,
+				8F4ED8962A5D4C6B00975BE9 /* PostServiceThreads.swift in Sources */,
 				8FD74DCC2A5D447C00899983 /* SettingsView.swift in Sources */,
 				8FD74DC62A5D446800899983 /* PostPresenter.swift in Sources */,
 				8FD74DC02A5D435B00899983 /* TabBarPresenter.swift in Sources */,
@@ -341,6 +375,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -369,7 +404,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -377,8 +412,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.markparker.TwiTreads;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

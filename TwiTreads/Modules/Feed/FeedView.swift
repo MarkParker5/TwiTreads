@@ -12,6 +12,8 @@ struct FeedView: View {
     @AnyStateObject var presenter: any FeedPresenter
     
     var body: some View {
-        Text("Feed")
+        Text("Feed is not implemented yet :(\nFeel free to contribute to [MarkParker5/TwiTreads](https://github.com/MarkParker5/TwiTreads)! on GitHub")
+            .multilineTextAlignment(.center)
+            .padding()
     }
 }
