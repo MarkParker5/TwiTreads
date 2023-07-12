@@ -13,5 +13,7 @@ struct SettingsView: View {
     
     var body: some View {
         Text("TODO: login to accounts")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.background)
     }
 }

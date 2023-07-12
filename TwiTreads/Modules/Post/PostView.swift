@@ -15,36 +15,58 @@ struct PostView: View {
     var body: some View {
         VStack {
             
-            TextField("Type your post here", text: $presenter.text)
-                .focused($isFocused)
-                .padding()
-                .cornerRadius(10)
-                .border(Color.black)
-            
-            /*
-             HStack {
-                Toogle(isOn: .constant(false), label: "Translate")
-                Menu {
-                    ForEach(presenter.language) { language in
-                        Text(language.name)
-                    }
-                } label: {
-                    Button("Language") {
-                        presenter.onLanguageTap(language)
-                    }
+            HStack {
+                
+                Button("Cancel") {
+                    isFocused = false
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading)
+                
+                Text("New Post")
+                    .font(.title3)
+                
+                Spacer()
+                    .frame(maxWidth: .infinity)
             }
-            Text(presenter.translatedText)
-            */
             
-            Toggle("Twitter", isOn: $presenter.isTwitterOn)
+            Divider()
             
-            Toggle("Threads", isOn: $presenter.isThreadsOn)
-            
-            Button("Post", action: presenter.onPostTap)
+            Group {
+                TextField("Type your post here", text: $presenter.text, axis: .vertical)
+                    .focused($isFocused)
+                    .lineLimit(1...5)
+                    .padding()
+                
+                /*
+                 HStack {
+                 Toogle(isOn: .constant(false), label: "Translate")
+                 Menu {
+                 ForEach(presenter.language) { language in
+                 Text(language.name)
+                 }
+                 } label: {
+                 Button("Language") {
+                 presenter.onLanguageTap(language)
+                 }
+                 }
+                 }
+                 Text(presenter.translatedText)
+                 */
+                
+                Spacer()
+                
+                Toggle("Twitter", isOn: $presenter.isTwitterOn)
+                
+                Toggle("Threads", isOn: $presenter.isThreadsOn)
+                
+                Button("Post", action: presenter.onPostTap)
+                    .padding(.vertical)
+            }
+            .padding(.horizontal)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding()
+        .background(Color.background)
     }
 }
 
