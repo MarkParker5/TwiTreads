@@ -12,17 +12,19 @@ import TwitterAPIKit
 class PostServiceTwitter: PostService {
     
     var isLoggedIn: Bool {
-        accessToken != nil
+        token != nil
     }
     
     func login() async throws {
+        let client = TwitterAPIClient(.basic(apiKey: Key.consumerKey, apiSecretKey: Key.consumerSecret))
+        
         let authorizeURL = client.auth.oauth20.makeOAuth2AuthorizeURL(.init(
             clientID: Key.consumerKey,
             redirectURI: redirectUrl,
             state: "state",
             codeChallenge: codeChallenge,
             codeChallengeMethod: "plain",
-            scopes: ["tweet.read", "tweet.write", "users.read", "offline.access"]
+            scopes: scope
         ))!
         
         DispatchQueue.main.async {
@@ -38,6 +40,8 @@ class PostServiceTwitter: PostService {
             return
         }
         
+        let client = TwitterAPIClient(.basic(apiKey: Key.consumerKey, apiSecretKey: Key.consumerSecret))
+        
         let response = await client.auth.oauth20.postOAuth2AccessToken(.init(
             code: code,
             clientID: Key.consumerKey,
@@ -47,8 +51,14 @@ class PostServiceTwitter: PostService {
         
         switch response.result {
         case .success(let token):
-            accessToken = token.accessToken
-            refreshToken = token.refreshToken
+            self.token = .init(
+                clientID: Key.consumerKey,
+                scope: token.scope,
+                tokenType: token.tokenType,
+                expiresIn: token.expiresIn,
+                accessToken: token.accessToken,
+                refreshToken: token.refreshToken
+            )
         case .failure(let error):
             print("[Error]", Self.self, #function, #line, error)
         }
@@ -56,28 +66,33 @@ class PostServiceTwitter: PostService {
     
     func post(message: String) async throws {
         try await refresh()
-        let client = TwitterAPIClient(.bearer(accessToken!))
+        guard let token else { return }
+        let client = TwitterAPIClient(.bearer(token.accessToken))
         let response = await client.v2.tweet.postTweet(PostTweetsRequestV2(text: message)).responseObject
         print(response)
     }
     
     func refresh() async throws {
-        // TODO: refresh token
+        guard let token else { return }
+        let client = TwitterAPIClient(.oauth20(token))
+        let refresh = try await client.refreshOAuth20Token(
+            type: .confidentialClient(
+                clientID: Key.consumerKey,
+                clientSecret: Key.consumerSecret
+            )
+        )
+        guard refresh.refreshed else { return }
+        self.token = refresh.token
     }
     
     // MARK: private
     
-    private let client = TwitterAPIClient(.basic(apiKey: Key.consumerKey, apiSecretKey: Key.consumerSecret))
-    
     private let redirectUrl: String = "twitreads://auth-twitter"
-    
     private let codeChallenge: String = "code challenge"
-
-    @UserDefault(key: .twitterAccessToken, defaultValue: nil)
-    private var accessToken: String?
+    private let scope: [String] = ["tweet.read", "tweet.write", "users.read", "offline.access"]
     
-    @UserDefault(key: .twitterRefreshToken, defaultValue: nil)
-    private var refreshToken: String?
+    @UserDefaultCodable(key: .twitterToken, defaultValue: nil)
+    private var token: TwitterAuthenticationMethod.OAuth20?
     
     private enum Key {
         static var consumerKey: String {
