@@ -12,8 +12,17 @@ struct SettingsView: View {
     @AnyStateObject var presenter: any SettingsPresenter
     
     var body: some View {
-        Text("TODO: login to accounts")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.background)
+        VStack {
+            
+            Button("Connect Twitter", action: presenter.onAddTwitterTap)
+                .padding()
+            
+            Button("Connect Threads", action: presenter.onAddThreadsTap)
+                .padding()
+            
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.background)
     }
+    
 }

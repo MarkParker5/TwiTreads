@@ -9,6 +9,16 @@ import Foundation
 
 class PostServiceMock: PostService {
     
+    var isLoggedIn: Bool { true }
+    
+    func login() async throws {
+        
+    }
+    
+    func handleAuthUrl(url: URL) async throws {
+        
+    }
+    
     func post(message: String) async throws {
         
     }

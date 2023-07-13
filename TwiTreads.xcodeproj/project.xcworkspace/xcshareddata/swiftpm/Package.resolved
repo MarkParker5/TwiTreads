@@ -8,6 +8,15 @@
         "branch" : "master",
         "revision" : "e42b7856e50790bcb472e8e452af930a4d53231a"
       }
+    },
+    {
+      "identity" : "twitterapikit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mironal/TwitterAPIKit",
+      "state" : {
+        "revision" : "7bbdd82ee0cfd241bbe07f1f7fa1e51a0cf32244",
+        "version" : "0.2.3"
+      }
     }
   ],
   "version" : 2

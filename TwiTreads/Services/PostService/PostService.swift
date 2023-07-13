@@ -9,5 +9,11 @@ import Foundation
 
 protocol PostService {
     
+    var isLoggedIn: Bool { get async }
+    
+    func login() async throws
+    
+    func handleAuthUrl(url: URL) async throws
+    
     func post(message: String) async throws
 }

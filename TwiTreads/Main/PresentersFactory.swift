@@ -38,7 +38,9 @@ final class PresentersFactoryImpl: PresentersFactory {
     }
     
     func settingsPresenter() -> SettingsPresenter {
-        SettingsPresenterImpl()
+        SettingsPresenterImpl(dependencies: .init(
+            postServiceProvider: diContainer.resolve(type: PostServiceProvider.self)
+        ))
     }
     
     init(diContainer: DIContainer) {

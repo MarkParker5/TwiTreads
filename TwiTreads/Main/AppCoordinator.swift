@@ -8,7 +8,10 @@
 import Foundation
 
 protocol AppCoordinator {
+    
     var presentersFactory: PresentersFactory { get }
+    
+    func onOpenUrl(url: URL)
 }
 
 final class AppCoordinatorImpl: AppCoordinator {
@@ -25,7 +28,24 @@ final class AppCoordinatorImpl: AppCoordinator {
         )
     }
     
+    // MARK: AppCoordinator
+    
     lazy var presentersFactory: PresentersFactory = PresentersFactoryImpl(diContainer: diContainer)
+    
+    func onOpenUrl(url: URL) {
+//        print("OnOpenUrl", url)
+        
+        Task {
+            let postServiceProvider = diContainer.resolve(type: PostServiceProvider.self)
+            let postService: PostService
+            if URLComponents(url: url, resolvingAgainstBaseURL: true)?.host == "auth-twitter" {
+                postService = postServiceProvider.twitterService
+            } else {
+                postService = postServiceProvider.threadsService
+            }
+            try? await postService.handleAuthUrl(url: url)
+        }
+    }
     
     // MARK: private
     

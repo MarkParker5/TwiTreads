@@ -12,6 +12,9 @@
 		8F4ED8962A5D4C6B00975BE9 /* PostServiceThreads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED8952A5D4C6B00975BE9 /* PostServiceThreads.swift */; };
 		8F4ED89A2A5D4CA600975BE9 /* PostServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED8992A5D4CA600975BE9 /* PostServiceProvider.swift */; };
 		8F4ED89C2A5D4CBF00975BE9 /* PostServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */; };
+		8F7470CB2A5E9C040070201D /* TwitterAPIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7470CA2A5E9C040070201D /* TwitterAPIKit */; };
+		8F7470CD2A5E9E4D0070201D /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7470CC2A5E9E4D0070201D /* UserDefault.swift */; };
+		8F7470E62A5EADCB0070201D /* InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7470E52A5EADCB0070201D /* InfoPlist.swift */; };
 		8FD74D782A5D359100899983 /* TwiTreadsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD74D772A5D359100899983 /* TwiTreadsApp.swift */; };
 		8FD74D7C2A5D359100899983 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FD74D7B2A5D359100899983 /* Assets.xcassets */; };
 		8FD74D802A5D359100899983 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FD74D7F2A5D359100899983 /* Preview Assets.xcassets */; };
@@ -38,12 +41,17 @@
 		8F4ED8952A5D4C6B00975BE9 /* PostServiceThreads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceThreads.swift; sourceTree = "<group>"; };
 		8F4ED8992A5D4CA600975BE9 /* PostServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceProvider.swift; sourceTree = "<group>"; };
 		8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceMock.swift; sourceTree = "<group>"; };
+		8F7470CC2A5E9E4D0070201D /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		8F7470D92A5EA6EC0070201D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8F7470E32A5EACD70070201D /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		8F7470E52A5EADCB0070201D /* InfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlist.swift; sourceTree = "<group>"; };
+		8F7470E82A5EB2830070201D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F7470EA2A603E140070201D /* ConfigExample.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigExample.xcconfig; sourceTree = "<group>"; };
 		8FD74D742A5D359100899983 /* TwiTreads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwiTreads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FD74D772A5D359100899983 /* TwiTreadsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwiTreadsApp.swift; sourceTree = "<group>"; };
 		8FD74D7B2A5D359100899983 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FD74D7D2A5D359100899983 /* TwiTreads.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwiTreads.entitlements; sourceTree = "<group>"; };
 		8FD74D7F2A5D359100899983 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		8FD74DA32A5D36DD00899983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FD74DAC2A5D374500899983 /* PresentersFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentersFactory.swift; sourceTree = "<group>"; };
 		8FD74DAE2A5D374B00899983 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		8FD74DB02A5D378400899983 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -65,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F7470CB2A5E9C040070201D /* TwitterAPIKit in Frameworks */,
 				8FD74DBB2A5D412600899983 /* AnyObservableObject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				8FD74D762A5D359100899983 /* TwiTreads */,
+				8F7470D92A5EA6EC0070201D /* .gitignore */,
 				8FD74D752A5D359100899983 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,9 +141,11 @@
 		8FD74DA22A5D36CA00899983 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8F7470E82A5EB2830070201D /* Info.plist */,
 				8FD74D7B2A5D359100899983 /* Assets.xcassets */,
-				8FD74DA32A5D36DD00899983 /* Info.plist */,
 				8FD74D7D2A5D359100899983 /* TwiTreads.entitlements */,
+				8F7470EA2A603E140070201D /* ConfigExample.xcconfig */,
+				8F7470E32A5EACD70070201D /* Config.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -218,7 +230,9 @@
 		8FD74DBC2A5D413C00899983 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				8F7470E52A5EADCB0070201D /* InfoPlist.swift */,
 				8FD74DBD2A5D414600899983 /* Imports.swift */,
+				8F7470CC2A5E9E4D0070201D /* UserDefault.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -241,6 +255,7 @@
 			name = TwiTreads;
 			packageProductDependencies = (
 				8FD74DBA2A5D412600899983 /* AnyObservableObject */,
+				8F7470CA2A5E9C040070201D /* TwitterAPIKit */,
 			);
 			productName = TwiTreads;
 			productReference = 8FD74D742A5D359100899983 /* TwiTreads.app */;
@@ -272,6 +287,7 @@
 			mainGroup = 8FD74D6B2A5D359000899983;
 			packageReferences = (
 				8FD74DB92A5D412600899983 /* XCRemoteSwiftPackageReference "AnyObservableObject" */,
+				8F7470C92A5E9C040070201D /* XCRemoteSwiftPackageReference "TwitterAPIKit" */,
 			);
 			productRefGroup = 8FD74D752A5D359100899983 /* Products */;
 			projectDirPath = "";
@@ -307,6 +323,7 @@
 				8F4ED89C2A5D4CBF00975BE9 /* PostServiceMock.swift in Sources */,
 				8FD74DB12A5D378400899983 /* AppCoordinator.swift in Sources */,
 				8FD74DBE2A5D414600899983 /* Imports.swift in Sources */,
+				8F7470CD2A5E9E4D0070201D /* UserDefault.swift in Sources */,
 				8FD74DC82A5D446E00899983 /* FeedView.swift in Sources */,
 				8FD74D782A5D359100899983 /* TwiTreadsApp.swift in Sources */,
 				8F4ED89A2A5D4CA600975BE9 /* PostServiceProvider.swift in Sources */,
@@ -319,6 +336,7 @@
 				8FD74DC42A5D446000899983 /* PostView.swift in Sources */,
 				8FD74DB52A5D390A00899983 /* RootView.swift in Sources */,
 				8FD74DCE2A5D448500899983 /* SettingsPresenter.swift in Sources */,
+				8F7470E62A5EADCB0070201D /* InfoPlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +345,7 @@
 /* Begin XCBuildConfiguration section */
 		8FD74D982A5D359100899983 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F7470E32A5EACD70070201D /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -371,6 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -381,6 +401,7 @@
 		};
 		8FD74D9B2A5D359100899983 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F7470E32A5EACD70070201D /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -392,6 +413,7 @@
 				DEVELOPMENT_TEAM = 6BLS568MFQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TwiTreads/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TwiTreads;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -445,6 +467,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8F7470C92A5E9C040070201D /* XCRemoteSwiftPackageReference "TwitterAPIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mironal/TwitterAPIKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.3;
+			};
+		};
 		8FD74DB92A5D412600899983 /* XCRemoteSwiftPackageReference "AnyObservableObject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MarkParker5/AnyObservableObject";
@@ -456,6 +486,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8F7470CA2A5E9C040070201D /* TwitterAPIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7470C92A5E9C040070201D /* XCRemoteSwiftPackageReference "TwitterAPIKit" */;
+			productName = TwitterAPIKit;
+		};
 		8FD74DBA2A5D412600899983 /* AnyObservableObject */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8FD74DB92A5D412600899983 /* XCRemoteSwiftPackageReference "AnyObservableObject" */;

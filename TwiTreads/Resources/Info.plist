@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   Info.plist
-   TwiTreads
-
-   Created by Mark Parker on 11/07/2023.
-   Copyright (c) 2023 ___ORGANIZATIONNAME___. All rights reserved.
--->
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>me.markparker.TwiTreads</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twitreads</string>
+			</array>
+		</dict>
+	</array>
+	<key>TWITTER_CONSUMER_KEY</key>
+	<string>$(TWITTER_CONSUMER_KEY)</string>
+	<key>TWITTER_CONSUMER_SECRET</key>
+	<string>$(TWITTER_CONSUMER_SECRET)</string>
+</dict>
 </plist>

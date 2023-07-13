@@ -15,6 +15,7 @@ struct TwiTreadsApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(presenter: coordinator.presentersFactory.rootPresenter)
+                .onOpenURL(perform: coordinator.onOpenUrl)
         }
     }
 }
