@@ -30,8 +30,8 @@ class PostServiceThreads: PostService {
         
         let instPublicKey = try await getInstagramPublicKey()
         let timestampString = String(Int(Date().timeIntervalSince1970))
-        let encryptedPassword = dependencies.cryptoService.encryptRSA(string: "\(timestampString)\n\(credentials.password)", publicKey: instPublicKey.publicKey)!
-        let base64Password = encryptedPassword.data(using: .utf8)!.base64EncodedString()
+        let string = "\(timestampString)\n\(credentials.password)"
+        let encryptedPassword = try dependencies.cryptoService.encryptRSA(string: string, publicKey: instPublicKey.publicKey)
         
         instagramApiToken = try await getInstagramApiToken(
             encryptedPassword: encryptedPassword,
@@ -65,7 +65,15 @@ class PostServiceThreads: PostService {
     
     private var headers: HTTPHeaders {
         [
-            "Authorization": "Bearer IGT:2:\(instagramApiToken!)",
+            "User-Agent": "Barcelona 289.0.0.77.109 Android",
+            "Sec-Fetch-Site": "same-origin",
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Authorization": "Bearer IGT:2:\(instagramApiToken!)"
+        ]
+    }
+    
+    private var publicHeaders: HTTPHeaders {
+        [
             "User-Agent": "Barcelona 289.0.0.77.109 Android",
             "Sec-Fetch-Site": "same-origin",
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
@@ -119,31 +127,61 @@ class PostServiceThreads: PostService {
     private func getInstagramPublicKey() async throws -> InstagramPublicKey {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let request = AF.request("\(instagramApiUrl)/qe/bootstrap/", headers: headers)
-        let dataTask = request.serializingDecodable(InstagramPublicKey.self, decoder: decoder)
-        let value = try await dataTask.value
-        return value
+        let request = AF.request("\(instagramApiUrl)/qe/sync/", method: .post, parameters: [:], headers: publicHeaders)
+        let dataTask = request.serializingString()
+        let response = await dataTask.response
+        let keyId = response.response?.headers.value(for: "ig-set-password-encryption-key-id")
+        let publicKey = response.response?.headers.value(for: "ig-set-password-encryption-pub-key")
+        guard let keyId, let publicKey else {
+            throw NSError(domain: "PostServiceThreads", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to get Instagram public key"])
+        }
+        return InstagramPublicKey(keyId: keyId, publicKey: publicKey)
     }
     
     private func getInstagramApiToken(encryptedPassword: String, instagramPublicKeyId: String, timestamp: String) async throws -> String {
-        let parameters = LoginParameters(
-            jazoest: "2725",
-            phoneId: deviceId,
-            _csrftoken: "missing",
-            username: username!,
-            adid: UUID().uuidString,
-            guid: UUID().uuidString,
-            deviceId: deviceId,
-            password: "\(encryptedPassword)\n\(instagramPublicKeyId)\n\(timestamp)",
-            loginAttemptCount: "0"
-        )
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        let requestData = try encoder.encode(parameters)
-        let request = AF.request("\(instagramApiUrl)/accounts/login/", method: .post, parameters: requestData, headers: headers)
-        let dataTask = request.serializingDecodable(LoginResponse.self)
-        let value = try await dataTask.value
-        return value.loggedInUser.pk
+        let blockVersion = "5f56efad68e1edec7801f630b5c122704ec5378adbee6609a448f105f34a9c73"
+
+        let params = [
+            "client_input_params": [
+                "password": "#PWD_INSTAGRAM:4:\(timestamp):\(encryptedPassword)",
+                "contact_point": username,
+                "device_id": deviceId
+            ],
+            "server_params": [
+                "credential_type": "password",
+                "device_id": deviceId
+            ]
+        ]
+
+        let clientContext = [
+            "bloks_version": blockVersion,
+            "styles_id": "instagram"
+        ]
+        
+        guard
+            let paramsData = try? JSONSerialization.data(withJSONObject: params, options: []),
+            let paramsString = String(data: paramsData, encoding: .utf8),
+            let clientContextData = try? JSONSerialization.data(withJSONObject: clientContext, options: []),
+            let clientContextString = String(data: clientContextData, encoding: .utf8)
+        else {
+            throw NSError(domain: "PostServiceThreads", code: 0, userInfo: [NSLocalizedDescriptionKey: "Can't serialize params or client context"])
+        }
+        
+        let parameters = [
+            "params": paramsString,
+            "bk_client_context": clientContextString,
+            "bloks_versioning_id": blockVersion
+        ]
+
+        do {
+            let request = AF.request("\(instagramApiUrl)/bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/", method: .post, parameters: parameters, headers: publicHeaders)
+            let dataTask = request.serializingDecodable(LoginResponse.self)
+            let value = try await dataTask.value
+            return value.loggedInUser.pk
+        } catch {
+            print(Self.self, #function, #line, error, "\n")
+            throw error
+        }
     }
     
     private func createDeviceHash() -> String {
@@ -167,18 +205,6 @@ struct UserInfo: Codable {
     let isPrivate: Bool
     let profilePicUrl: String
     let isVerified: Bool
-}
-
-fileprivate struct LoginParameters: Codable {
-    let jazoest: String
-    let phoneId: String
-    let _csrftoken: String
-    let username: String
-    let adid: String
-    let guid: String
-    let deviceId: String
-    let password: String
-    let loginAttemptCount: String
 }
 
 fileprivate struct LoginResponse: Codable {

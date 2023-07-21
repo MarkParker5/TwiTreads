@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "swiftyrsa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/TakeScoop/SwiftyRSA",
+      "state" : {
+        "revision" : "6521919ad0e99dff927685f142d8136479acb452",
+        "version" : "1.8.0"
+      }
+    },
+    {
       "identity" : "twitterapikit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mironal/TwitterAPIKit",

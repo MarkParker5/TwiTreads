@@ -22,7 +22,7 @@ struct LoginView: View {
                 .background(Color(.tertiarySystemBackground))
                 .cornerRadius(10)
             
-            TextField("Password", text: $credentials.password)
+            SecureField("Password", text: $credentials.password)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 12)
                 .background(Color(.tertiarySystemBackground))

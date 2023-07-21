@@ -39,7 +39,23 @@
 		8FF75B282A6A82F00081DA5F /* CryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF75B272A6A82F00081DA5F /* CryptoService.swift */; };
 		8FF75B2B2A6A90CF0081DA5F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF75B2A2A6A90CF0081DA5F /* LoginView.swift */; };
 		8FF75B2E2A6A957F0081DA5F /* AlamofireNetworkActivityLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 8FF75B2D2A6A957F0081DA5F /* AlamofireNetworkActivityLogger */; };
+		8FF75B362A6AAA830081DA5F /* SwiftyRSA in Frameworks */ = {isa = PBXBuildFile; productRef = 8FF75B352A6AAA830081DA5F /* SwiftyRSA */; };
+		8FF75B372A6AAA930081DA5F /* SwiftyRSA in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8FF75B352A6AAA830081DA5F /* SwiftyRSA */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8FF75B332A6AAA360081DA5F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8FF75B372A6AAA930081DA5F /* SwiftyRSA in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8F4ED8912A5D4C2C00975BE9 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
@@ -86,6 +102,7 @@
 				8FF75B212A6A7B4E0081DA5F /* Alamofire in Frameworks */,
 				8FF75B2E2A6A957F0081DA5F /* AlamofireNetworkActivityLogger in Frameworks */,
 				8F7470CB2A5E9C040070201D /* TwitterAPIKit in Frameworks */,
+				8FF75B362A6AAA830081DA5F /* SwiftyRSA in Frameworks */,
 				8FD74DBB2A5D412600899983 /* AnyObservableObject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +304,7 @@
 				8FD74D702A5D359000899983 /* Sources */,
 				8FD74D712A5D359000899983 /* Frameworks */,
 				8FD74D722A5D359000899983 /* Resources */,
+				8FF75B332A6AAA360081DA5F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -298,6 +316,7 @@
 				8F7470CA2A5E9C040070201D /* TwitterAPIKit */,
 				8FF75B202A6A7B4E0081DA5F /* Alamofire */,
 				8FF75B2D2A6A957F0081DA5F /* AlamofireNetworkActivityLogger */,
+				8FF75B352A6AAA830081DA5F /* SwiftyRSA */,
 			);
 			productName = TwiTreads;
 			productReference = 8FD74D742A5D359100899983 /* TwiTreads.app */;
@@ -332,6 +351,7 @@
 				8F7470C92A5E9C040070201D /* XCRemoteSwiftPackageReference "TwitterAPIKit" */,
 				8FF75B1F2A6A7B4E0081DA5F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				8FF75B2C2A6A957F0081DA5F /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
+				8FF75B342A6AAA830081DA5F /* XCRemoteSwiftPackageReference "SwiftyRSA" */,
 			);
 			productRefGroup = 8FD74D752A5D359100899983 /* Products */;
 			projectDirPath = "";
@@ -547,6 +567,14 @@
 				minimumVersion = 3.4.0;
 			};
 		};
+		8FF75B342A6AAA830081DA5F /* XCRemoteSwiftPackageReference "SwiftyRSA" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TakeScoop/SwiftyRSA";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -569,6 +597,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8FF75B2C2A6A957F0081DA5F /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */;
 			productName = AlamofireNetworkActivityLogger;
+		};
+		8FF75B352A6AAA830081DA5F /* SwiftyRSA */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8FF75B342A6AAA830081DA5F /* XCRemoteSwiftPackageReference "SwiftyRSA" */;
+			productName = SwiftyRSA;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

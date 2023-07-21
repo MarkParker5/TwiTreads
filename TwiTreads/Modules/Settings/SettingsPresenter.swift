@@ -56,6 +56,7 @@ class SettingsPresenterImpl: SettingsPresenter, ObservableObject {
             do {
                 // uses oauth via twitter app/website with redirect urls so credentials are not needed
                 try await dependencies.postServiceProvider.twitterService.login()
+                isTwitterLoggedIn = true
             } catch {
                 print(Self.self, #function, #line, error, "\n")
             }
@@ -72,6 +73,7 @@ class SettingsPresenterImpl: SettingsPresenter, ObservableObject {
             do {
                 // unofficial reverse-engineered api imitates the instagram app so credentials are required
                 try await dependencies.postServiceProvider.threadsService.login(credentials: credentials)
+                isThreadsLoggedIn = true
             } catch {
                 print(Self.self, #function, #line, error, "\n")
             }

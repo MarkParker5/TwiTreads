@@ -7,10 +7,11 @@
 
 import Foundation
 import CryptoKit
+import SwiftyRSA
 
 protocol CryptoService {
     
-    func encryptRSA(string: String, publicKey: String) -> String?
+    func encryptRSA(string: String, publicKey: String) throws -> String
     
     func sha256(string: String, prefix: Int?) -> String
 }
@@ -25,34 +26,17 @@ extension CryptoService {
 
 class CryptoServiceImpl: CryptoService {
     
-    func encryptRSA(string: String, publicKey: String) -> String? {
-        let keyString = publicKey.replacingOccurrences(of: "-----BEGIN PUBLIC KEY-----\n", with: "").replacingOccurrences(of: "\n-----END PUBLIC KEY-----", with: "")
-        guard let data = Data(base64Encoded: keyString) else { return nil }
-        
-        var attributes: CFDictionary {
-            return [kSecAttrKeyType         : kSecAttrKeyTypeRSA,
-                    kSecAttrKeyClass        : kSecAttrKeyClassPublic,
-                    kSecAttrKeySizeInBits   : 2048,
-                    kSecReturnPersistentRef : kCFBooleanTrue] as CFDictionary
+    func encryptRSA(string: String, publicKey: String) throws -> String {
+        guard
+            let publicKeyData = Data(base64Encoded: publicKey),
+            let publicKeyPem = String(data: publicKeyData, encoding: .utf8)
+        else {
+            throw NSError(domain: "CryptoService", code: 1, userInfo: [NSLocalizedDescriptionKey: "Could not create public key from base64 string"])
         }
         
-        var error: Unmanaged<CFError>? = nil
-        guard let secKey = SecKeyCreateWithData(data as CFData, attributes, &error) else {
-            print(error.debugDescription)
-            return nil
-        }
-        return encrypt(string: string, publicKey: secKey)
-    }
-    
-    func encrypt(string: String, publicKey: SecKey) -> String? {
-        let buffer = [UInt8](string.utf8)
-        
-        var keySize   = SecKeyGetBlockSize(publicKey)
-        var keyBuffer = [UInt8](repeating: 0, count: keySize)
-        
-        // Encrypto  should less than key length
-        guard SecKeyEncrypt(publicKey, SecPadding.PKCS1, buffer, buffer.count, &keyBuffer, &keySize) == errSecSuccess else { return nil }
-        return Data(bytes: keyBuffer, count: keySize).base64EncodedString()
+        let publicKey = try PublicKey(pemEncoded: publicKeyPem)
+        let clear = try ClearMessage(string: string, using: .utf8)
+        return try clear.encrypted(with: publicKey, padding: .PKCS1).base64String
     }
     
     func sha256(string: String, prefix: Int?) -> String {
