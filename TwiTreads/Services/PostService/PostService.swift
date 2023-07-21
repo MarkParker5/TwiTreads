@@ -9,7 +9,7 @@ import Foundation
 
 protocol PostService {
     
-    var isLoggedIn: Bool { get async }
+    var isLoggedIn: Bool { get }
     
     func login(credentials: Credentials?) async throws
     

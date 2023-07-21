@@ -21,7 +21,7 @@ class PostServiceThreads: PostService {
     // MARK: PostService
     
     var isLoggedIn: Bool {
-        false
+        instagramApiToken != nil
     }
     
     func login(credentials: Credentials?) async throws {
@@ -33,18 +33,11 @@ class PostServiceThreads: PostService {
         let encryptedPassword = dependencies.cryptoService.encryptRSA(string: "\(timestampString)\n\(credentials.password)", publicKey: instPublicKey.publicKey)!
         let base64Password = encryptedPassword.data(using: .utf8)!.base64EncodedString()
         
-        let instagramApiToken = try await getInstagramApiToken(
+        instagramApiToken = try await getInstagramApiToken(
             encryptedPassword: encryptedPassword,
             instagramPublicKeyId: instPublicKey.keyId,
             timestamp: timestampString
         )
-        
-        headers = [
-            "Authorization": "Bearer IGT:2:\(instagramApiToken)",
-            "User-Agent": "Barcelona 289.0.0.77.109 Android",
-            "Sec-Fetch-Site": "same-origin",
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-        ]
         
         userId = try await getUserId()
     }
@@ -59,10 +52,25 @@ class PostServiceThreads: PostService {
     
     private let dependencies: Dependencies
     private let instagramApiUrl = "https://i.instagram.com/api/v1"
-    private var username: String?
-    private var headers: HTTPHeaders?
-    private var userId: Int?
     private lazy var deviceId: String = createDeviceHash()
+    
+    @UserDefault(key: "PostServiceThreads.username", defaultValue: nil)
+    private var username: String?
+    
+    @UserDefault(key: "PostServiceThreads.userId", defaultValue: nil)
+    private var userId: Int?
+    
+    @UserDefault(key: "PostServiceThreads.instagramApiToken", defaultValue: nil)
+    private var instagramApiToken: String?
+    
+    private var headers: HTTPHeaders {
+        [
+            "Authorization": "Bearer IGT:2:\(instagramApiToken!)",
+            "User-Agent": "Barcelona 289.0.0.77.109 Android",
+            "Sec-Fetch-Site": "same-origin",
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        ]
+    }
     
     private func getUserInfo(username: String) async throws -> UserInfo {
         let decoder = JSONDecoder()

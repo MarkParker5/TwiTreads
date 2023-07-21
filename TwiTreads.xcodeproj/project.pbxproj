@@ -37,6 +37,8 @@
 		8FF75B232A6A7BE90081DA5F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF75B222A6A7BE90081DA5F /* User.swift */; };
 		8FF75B252A6A7C1E0081DA5F /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF75B242A6A7C1E0081DA5F /* Credentials.swift */; };
 		8FF75B282A6A82F00081DA5F /* CryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF75B272A6A82F00081DA5F /* CryptoService.swift */; };
+		8FF75B2B2A6A90CF0081DA5F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF75B2A2A6A90CF0081DA5F /* LoginView.swift */; };
+		8FF75B2E2A6A957F0081DA5F /* AlamofireNetworkActivityLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 8FF75B2D2A6A957F0081DA5F /* AlamofireNetworkActivityLogger */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +75,7 @@
 		8FF75B222A6A7BE90081DA5F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8FF75B242A6A7C1E0081DA5F /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		8FF75B272A6A82F00081DA5F /* CryptoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoService.swift; sourceTree = "<group>"; };
+		8FF75B2A2A6A90CF0081DA5F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF75B212A6A7B4E0081DA5F /* Alamofire in Frameworks */,
+				8FF75B2E2A6A957F0081DA5F /* AlamofireNetworkActivityLogger in Frameworks */,
 				8F7470CB2A5E9C040070201D /* TwitterAPIKit in Frameworks */,
 				8FD74DBB2A5D412600899983 /* AnyObservableObject in Frameworks */,
 			);
@@ -203,7 +207,7 @@
 		8FD74DAA2A5D372A00899983 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				8FD74DCB2A5D447C00899983 /* SettingsView.swift */,
+				8FF75B292A6A90C80081DA5F /* View */,
 				8FD74DCD2A5D448500899983 /* SettingsPresenter.swift */,
 			);
 			path = Settings;
@@ -264,6 +268,15 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
+		8FF75B292A6A90C80081DA5F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8FD74DCB2A5D447C00899983 /* SettingsView.swift */,
+				8FF75B2A2A6A90CF0081DA5F /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -284,6 +297,7 @@
 				8FD74DBA2A5D412600899983 /* AnyObservableObject */,
 				8F7470CA2A5E9C040070201D /* TwitterAPIKit */,
 				8FF75B202A6A7B4E0081DA5F /* Alamofire */,
+				8FF75B2D2A6A957F0081DA5F /* AlamofireNetworkActivityLogger */,
 			);
 			productName = TwiTreads;
 			productReference = 8FD74D742A5D359100899983 /* TwiTreads.app */;
@@ -317,6 +331,7 @@
 				8FD74DB92A5D412600899983 /* XCRemoteSwiftPackageReference "AnyObservableObject" */,
 				8F7470C92A5E9C040070201D /* XCRemoteSwiftPackageReference "TwitterAPIKit" */,
 				8FF75B1F2A6A7B4E0081DA5F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8FF75B2C2A6A957F0081DA5F /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
 			);
 			productRefGroup = 8FD74D752A5D359100899983 /* Products */;
 			projectDirPath = "";
@@ -354,6 +369,7 @@
 				8FD74DBE2A5D414600899983 /* Imports.swift in Sources */,
 				8F7470CD2A5E9E4D0070201D /* UserDefault.swift in Sources */,
 				8FD74DC82A5D446E00899983 /* FeedView.swift in Sources */,
+				8FF75B2B2A6A90CF0081DA5F /* LoginView.swift in Sources */,
 				8FD74D782A5D359100899983 /* TwiTreadsApp.swift in Sources */,
 				8F4ED89A2A5D4CA600975BE9 /* PostServiceProvider.swift in Sources */,
 				8F4ED8962A5D4C6B00975BE9 /* PostServiceThreads.swift in Sources */,
@@ -523,6 +539,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		8FF75B2C2A6A957F0081DA5F /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/konkab/AlamofireNetworkActivityLogger";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -540,6 +564,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8FF75B1F2A6A7B4E0081DA5F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		8FF75B2D2A6A957F0081DA5F /* AlamofireNetworkActivityLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8FF75B2C2A6A957F0081DA5F /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */;
+			productName = AlamofireNetworkActivityLogger;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

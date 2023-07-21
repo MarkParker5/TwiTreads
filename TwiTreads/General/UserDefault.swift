@@ -8,20 +8,29 @@
 import Foundation
 
 enum DefaultsKeys: String {
-    case twitterToken
-    // case threadsToken
+    case key
 }
 
 @propertyWrapper
 struct UserDefault<Value> {
     
-    let key: DefaultsKeys
+    let key: String
     let defaultValue: Value
     let container: UserDefaults = .standard
+    
+    init(key: String, defaultValue: Value) {
+        self.key = key
+        self.defaultValue = defaultValue
+    }
+    
+    init(key: DefaultsKeys, defaultValue: Value) {
+        self.key = key.rawValue
+        self.defaultValue = defaultValue
+    }
 
-    lazy var wrappedValue: Value = container.object(forKey: key.rawValue) as? Value ?? defaultValue {
+    lazy var wrappedValue: Value = container.object(forKey: key) as? Value ?? defaultValue {
         didSet {
-            container.set(wrappedValue, forKey: key.rawValue)
+            container.set(wrappedValue, forKey: key)
         }
     }
 }
@@ -29,9 +38,19 @@ struct UserDefault<Value> {
 @propertyWrapper
 struct UserDefaultCodable<Value: Codable> {
     
-    let key: DefaultsKeys
+    let key: String
     let defaultValue: Value
     let container: UserDefaults = .standard
+    
+    init(key: String, defaultValue: Value) {
+        self.key = key
+        self.defaultValue = defaultValue
+    }
+    
+    init(key: DefaultsKeys, defaultValue: Value) {
+        self.key = key.rawValue
+        self.defaultValue = defaultValue
+    }
 
     lazy var wrappedValue: Value = decode() ?? defaultValue {
         didSet {
@@ -40,13 +59,13 @@ struct UserDefaultCodable<Value: Codable> {
             else {
                 return
             }
-            container.set(data, forKey: key.rawValue)
+            container.set(data, forKey: key)
         }
     }
     
     private func decode() -> Value? {
         guard
-            let data = container.object(forKey: key.rawValue) as? Data,
+            let data = container.object(forKey: key) as? Data,
             let value = try? JSONDecoder().decode(Value.self, from: data)
         else {
             return nil

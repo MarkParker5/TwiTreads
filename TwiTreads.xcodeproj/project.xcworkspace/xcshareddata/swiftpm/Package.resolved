@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "alamofirenetworkactivitylogger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/konkab/AlamofireNetworkActivityLogger",
+      "state" : {
+        "revision" : "8db9d4e27176905298e7215e3d800e349cdfa30b",
+        "version" : "3.4.0"
+      }
+    },
+    {
       "identity" : "anyobservableobject",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MarkParker5/AnyObservableObject",

@@ -91,7 +91,7 @@ class PostServiceTwitter: PostService {
     private let codeChallenge: String = "code challenge"
     private let scope: [String] = ["tweet.read", "tweet.write", "users.read", "offline.access"]
     
-    @UserDefaultCodable(key: .twitterToken, defaultValue: nil)
+    @UserDefaultCodable(key: "PostServiceTwitter.token", defaultValue: nil)
     private var token: TwitterAuthenticationMethod.OAuth20?
     
     private enum Key {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AlamofireNetworkActivityLogger
 
 protocol AppCoordinator {
     
@@ -30,6 +31,9 @@ final class AppCoordinatorImpl: AppCoordinator {
                 )
             )
         )
+        
+        NetworkActivityLogger.shared.level = .debug
+        NetworkActivityLogger.shared.startLogging()
     }
     
     // MARK: AppCoordinator
