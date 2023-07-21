@@ -17,12 +17,16 @@ protocol AppCoordinator {
 final class AppCoordinatorImpl: AppCoordinator {
     
     init() {
+        diContainer.register(type: CryptoService.self, component: CryptoServiceImpl())
+        
         diContainer.register(
             type: PostServiceProvider.self,
             component: PostServiceProviderImpl(
                 dependencies: .init(
                     twitterService: PostServiceTwitter(),
-                    threadsService: PostServiceThreads()
+                    threadsService: PostServiceThreads(dependencies: .init(
+                        cryptoService: diContainer.resolve(type: CryptoService.self)
+                    ))
                 )
             )
         )

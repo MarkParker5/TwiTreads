@@ -11,9 +11,17 @@ protocol PostService {
     
     var isLoggedIn: Bool { get async }
     
-    func login() async throws
+    func login(credentials: Credentials?) async throws
     
     func handleAuthUrl(url: URL) async throws
     
+    // var userInfo: UserInfo async throws
+    
     func post(message: String) async throws
+}
+
+extension PostService {
+    func login() async throws {
+        try await login(credentials: nil)
+    }
 }

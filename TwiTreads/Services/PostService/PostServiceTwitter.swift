@@ -15,7 +15,7 @@ class PostServiceTwitter: PostService {
         token != nil
     }
     
-    func login() async throws {
+    func login(credentials: Credentials?) async throws {
         let client = TwitterAPIClient(.basic(apiKey: Key.consumerKey, apiSecretKey: Key.consumerSecret))
         
         let authorizeURL = client.auth.oauth20.makeOAuth2AuthorizeURL(.init(

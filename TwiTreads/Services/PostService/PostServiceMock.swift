@@ -11,7 +11,7 @@ class PostServiceMock: PostService {
     
     var isLoggedIn: Bool { true }
     
-    func login() async throws {
+    func login(credentials: Credentials?) async throws {
         
     }
     

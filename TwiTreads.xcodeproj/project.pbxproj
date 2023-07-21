@@ -33,6 +33,10 @@
 		8FD74DCA2A5D447300899983 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD74DC92A5D447300899983 /* FeedPresenter.swift */; };
 		8FD74DCC2A5D447C00899983 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD74DCB2A5D447C00899983 /* SettingsView.swift */; };
 		8FD74DCE2A5D448500899983 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD74DCD2A5D448500899983 /* SettingsPresenter.swift */; };
+		8FF75B212A6A7B4E0081DA5F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8FF75B202A6A7B4E0081DA5F /* Alamofire */; };
+		8FF75B232A6A7BE90081DA5F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF75B222A6A7BE90081DA5F /* User.swift */; };
+		8FF75B252A6A7C1E0081DA5F /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF75B242A6A7C1E0081DA5F /* Credentials.swift */; };
+		8FF75B282A6A82F00081DA5F /* CryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF75B272A6A82F00081DA5F /* CryptoService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +70,9 @@
 		8FD74DC92A5D447300899983 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
 		8FD74DCB2A5D447C00899983 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8FD74DCD2A5D448500899983 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		8FF75B222A6A7BE90081DA5F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8FF75B242A6A7C1E0081DA5F /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		8FF75B272A6A82F00081DA5F /* CryptoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FF75B212A6A7B4E0081DA5F /* Alamofire in Frameworks */,
 				8F7470CB2A5E9C040070201D /* TwitterAPIKit in Frameworks */,
 				8FD74DBB2A5D412600899983 /* AnyObservableObject in Frameworks */,
 			);
@@ -122,6 +130,7 @@
 			children = (
 				8FD74DA52A5D36EC00899983 /* Main */,
 				8FD74DB22A5D37EB00899983 /* Services */,
+				8FF75B1E2A6A7A250081DA5F /* Models */,
 				8FD74DA62A5D36EF00899983 /* Modules */,
 				8FD74DBC2A5D413C00899983 /* General */,
 				8FD74DA22A5D36CA00899983 /* Resources */,
@@ -212,6 +221,7 @@
 		8FD74DB22A5D37EB00899983 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8FF75B262A6A82DF0081DA5F /* Crypto */,
 				8F4ED88F2A5D4BFC00975BE9 /* PostService */,
 				8F4ED8972A5D4C9000975BE9 /* PostServiceFactory */,
 			);
@@ -237,6 +247,23 @@
 			path = General;
 			sourceTree = "<group>";
 		};
+		8FF75B1E2A6A7A250081DA5F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8FF75B222A6A7BE90081DA5F /* User.swift */,
+				8FF75B242A6A7C1E0081DA5F /* Credentials.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8FF75B262A6A82DF0081DA5F /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				8FF75B272A6A82F00081DA5F /* CryptoService.swift */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -256,6 +283,7 @@
 			packageProductDependencies = (
 				8FD74DBA2A5D412600899983 /* AnyObservableObject */,
 				8F7470CA2A5E9C040070201D /* TwitterAPIKit */,
+				8FF75B202A6A7B4E0081DA5F /* Alamofire */,
 			);
 			productName = TwiTreads;
 			productReference = 8FD74D742A5D359100899983 /* TwiTreads.app */;
@@ -288,6 +316,7 @@
 			packageReferences = (
 				8FD74DB92A5D412600899983 /* XCRemoteSwiftPackageReference "AnyObservableObject" */,
 				8F7470C92A5E9C040070201D /* XCRemoteSwiftPackageReference "TwitterAPIKit" */,
+				8FF75B1F2A6A7B4E0081DA5F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 8FD74D752A5D359100899983 /* Products */;
 			projectDirPath = "";
@@ -333,10 +362,13 @@
 				8FD74DC02A5D435B00899983 /* TabBarPresenter.swift in Sources */,
 				8FD74DAF2A5D374B00899983 /* DIContainer.swift in Sources */,
 				8FD74DAD2A5D374500899983 /* PresentersFactory.swift in Sources */,
+				8FF75B252A6A7C1E0081DA5F /* Credentials.swift in Sources */,
 				8FD74DC42A5D446000899983 /* PostView.swift in Sources */,
 				8FD74DB52A5D390A00899983 /* RootView.swift in Sources */,
 				8FD74DCE2A5D448500899983 /* SettingsPresenter.swift in Sources */,
 				8F7470E62A5EADCB0070201D /* InfoPlist.swift in Sources */,
+				8FF75B282A6A82F00081DA5F /* CryptoService.swift in Sources */,
+				8FF75B232A6A7BE90081DA5F /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +515,14 @@
 				kind = branch;
 			};
 		};
+		8FF75B1F2A6A7B4E0081DA5F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -495,6 +535,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8FD74DB92A5D412600899983 /* XCRemoteSwiftPackageReference "AnyObservableObject" */;
 			productName = AnyObservableObject;
+		};
+		8FF75B202A6A7B4E0081DA5F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8FF75B1F2A6A7B4E0081DA5F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

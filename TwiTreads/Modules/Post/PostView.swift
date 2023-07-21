@@ -71,33 +71,16 @@ struct PostView: View {
 }
 
 struct PostView_Previews: PreviewProvider {
+    class PostPresenterMock: PostPresenter, ObservableObject {
+        var text: String = ""
+        var isTwitterOn: Bool = true
+        var isThreadsOn: Bool = true
+        func onPostTap() {}
+    }
+    
     static var previews: some View {
         PostView(
-            presenter: PostPresenterImpl(
-                dependencies: .init(
-                    postServiceProvider: PostServiceProviderImpl(
-                        dependencies: .init(
-                            twitterService: PostServiceTwitter(),
-                            threadsService: PostServiceThreads()
-                        )
-                    )
-                )
-            )
+            presenter: PostPresenterMock()
         )
     }
 }
-
-//#Preview {
-//    PostView(
-//        presenter: PostPresenterImpl(
-//            dependencies: .init(
-//                postServiceProvider: PostServiceProviderImpl(
-//                    dependencies: .init(
-//                        twitterService: PostServiceMock(),
-//                        threadsService: PostServiceMock()
-//                    )
-//                )
-//            )
-//        )
-//    )
-//}
