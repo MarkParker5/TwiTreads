@@ -11,15 +11,11 @@ class PostServiceMock: PostService {
     
     var isLoggedIn: Bool { true }
     
-    func login(credentials: Credentials?) async throws {
-        
-    }
+    var user: User { get async throws { User(username: "mock") } }
     
-    func handleAuthUrl(url: URL) async throws {
-        
-    }
+    func login(credentials: Credentials?) async throws {}
     
-    func post(message: String) async throws {
-        
-    }
+    func handleAuthUrl(url: URL) async throws {}
+    
+    func post(message: String) async throws {}
 }

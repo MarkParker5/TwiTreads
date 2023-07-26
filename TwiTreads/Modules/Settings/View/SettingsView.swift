@@ -13,15 +13,27 @@ struct SettingsView: View {
     
     var body: some View {
         VStack {
-            Button("Connect Twitter", action: presenter.onAddTwitterTap)
-                .padding()
-                .disabled(presenter.isTwitterLoggedIn)
-                .opacity(presenter.isTwitterLoggedIn ? 0.3 : 1)
             
-            Button("Connect Threads", action: presenter.onAddThreadsTap)
-                .padding()
-                .disabled(presenter.isThreadsLoggedIn)
-                .opacity(presenter.isThreadsLoggedIn ? 0.3 : 1)
+            if presenter.isLoading {
+                ProgressView()
+            } else {
+                
+                if let user = presenter.twitterUser {
+                    Text("Twitter connected as @\(user.username)")
+                        .padding()
+                } else {
+                    Button("Connect Twitter", action: presenter.onAddTwitterTap)
+                        .padding()
+                }
+                
+                if let user = presenter.threadsUser {
+                    Text("Threads connected as @\(user.username)")
+                        .padding()
+                } else {
+                    Button("Connect Threads", action: presenter.onAddThreadsTap)
+                        .padding()
+                }
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)

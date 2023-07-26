@@ -15,6 +15,28 @@ class PostServiceTwitter: PostService {
         token != nil
     }
     
+    var user: User {
+        get async throws {
+            try await refresh()
+            
+            guard let token else {
+                print(Self.self, #function, #line, "Not logged in", "\n")
+                throw NSError(domain: "PostServiceTwitter", code: 0, userInfo: [NSLocalizedDescriptionKey: "Not logged in"])
+            }
+            
+            let client = TwitterAPIClient(.bearer(token.accessToken))
+            let result = await client.v2.user.getUser(GetUserRequestV2(id: "me")).responseDecodable(type: UserInfo.self).result
+            
+            switch result {
+            case .success(let info):
+                return User(username: info.data.username)
+            case .failure(let error):
+                print(Self.self, #function, #line, error, "\n")
+                throw error
+            }
+        }
+    }
+    
     func login(credentials: Credentials?) async throws {
         let client = TwitterAPIClient(.basic(apiKey: Key.consumerKey, apiSecretKey: Key.consumerSecret))
         
@@ -110,4 +132,14 @@ class PostServiceTwitter: PostService {
 fileprivate struct TweeterTokensResponse: Decodable {
     let accessToken: String
     let refreshToken: String 
+}
+
+fileprivate struct UserInfo: Codable {
+    let data: Data
+    
+    struct Data: Codable {
+        let id: String
+        let username: String
+        let name: String
+    }
 }

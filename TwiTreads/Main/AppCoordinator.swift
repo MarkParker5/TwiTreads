@@ -34,11 +34,12 @@ final class AppCoordinatorImpl: AppCoordinator {
         
         NetworkActivityLogger.shared.level = .debug
         NetworkActivityLogger.shared.startLogging()
+        NetworkActivityLogger.shared.stopLogging()
     }
     
     // MARK: AppCoordinator
     
-    lazy var presentersFactory: PresentersFactory = PresentersFactoryImpl(diContainer: diContainer)
+    @MainActor lazy var presentersFactory: PresentersFactory = PresentersFactoryImpl(diContainer: diContainer)
     
     func onOpenUrl(url: URL) {
 //        print("OnOpenUrl", url)

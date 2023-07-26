@@ -24,6 +24,16 @@ class PostServiceThreads: PostService {
         instagramApiToken != nil
     }
     
+    var user: User {
+        get async throws {
+            guard let username else {
+                throw noUsernameError
+            }
+            let userInfo = try await getUserInfo(username: username)
+            return User(username: userInfo.user.username)
+        }
+    }
+    
     func login(credentials: Credentials?) async throws {
         guard let credentials else { return }
         username = credentials.username
@@ -60,6 +70,10 @@ class PostServiceThreads: PostService {
     
     @UserDefault(key: "PostServiceThreads.instagramApiToken", defaultValue: nil)
     private var instagramApiToken: String?
+    
+    private var noUsernameError: NSError {
+        NSError(domain: "PostServiceThreads", code: 0, userInfo: [NSLocalizedDescriptionKey: "User is not logged in"])
+    }
     
     private var headers: HTTPHeaders {
         [
@@ -108,9 +122,12 @@ class PostServiceThreads: PostService {
     // MARK: helpers
     
     private func getUserId() async throws -> Int {
-        let url = "\(instagramApiUrl)/users/\(username!)/usernameinfo/"
+        guard let username else { throw noUsernameError }
+        
+        let url = "\(instagramApiUrl)/users/\(username)/usernameinfo/"
         let request = AF.request(url, headers: headers)
         let response = try await request.serializingString().value
+        
         guard
             let data = response.data(using: .utf8),
             let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any],
@@ -119,6 +136,7 @@ class PostServiceThreads: PostService {
         else {
             return 0
         }
+        
         return userId
     }
     
@@ -137,12 +155,14 @@ class PostServiceThreads: PostService {
     }
     
     private func getInstagramApiToken(encryptedPassword: String, instagramPublicKeyId: String, timestamp: String) async throws -> String {
+        guard let username else { throw noUsernameError }
+        
         let blockVersion = "5f56efad68e1edec7801f630b5c122704ec5378adbee6609a448f105f34a9c73"
 
         let params = [
             "client_input_params": [
                 "password": "#PWD_INSTAGRAM:0:\(timestamp):\(encryptedPassword)", // 4
-                "contact_point": username!,
+                "contact_point": username,
                 "device_id": deviceId
             ],
             "server_params": [
@@ -203,13 +223,15 @@ fileprivate struct InstagramPublicKey: Codable {
     let publicKey: String
 }
 
-struct UserInfo: Codable {
-    let id: Int
-    let username: String
-    let fullName: String
-    let isPrivate: Bool
-    let profilePicUrl: String
-    let isVerified: Bool
+fileprivate struct UserInfo: Codable {
+    let user: User
+    
+    struct User: Codable {
+        let username: String
+        let fullName: String
+        let biography: String
+        let profilePicUrl: URL
+    }
 }
 
 fileprivate struct ThreadParameters: Codable {
@@ -219,7 +241,7 @@ fileprivate struct ThreadParameters: Codable {
     let replyTo: Int?
 }
 
-struct Thread: Codable {
+fileprivate struct Thread: Codable {
     let threadId: String
     let threadTitle: String
     let threadType: String

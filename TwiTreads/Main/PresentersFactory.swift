@@ -7,10 +7,12 @@
 
 import Foundation
 
+@MainActor
 protocol PresentersFactory {
     var rootPresenter: any RootPresenter { get }
 }
 
+@MainActor
 final class PresentersFactoryImpl: PresentersFactory {
     
     var rootPresenter: RootPresenter {
