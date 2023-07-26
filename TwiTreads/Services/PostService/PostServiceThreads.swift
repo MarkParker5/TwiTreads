@@ -30,11 +30,9 @@ class PostServiceThreads: PostService {
         
         let instPublicKey = try await getInstagramPublicKey()
         let timestampString = String(Int(Date().timeIntervalSince1970))
-        let string = "\(timestampString)\n\(credentials.password)"
-        let encryptedPassword = try dependencies.cryptoService.encryptRSA(string: string, publicKey: instPublicKey.publicKey)
         
         instagramApiToken = try await getInstagramApiToken(
-            encryptedPassword: encryptedPassword,
+            encryptedPassword: credentials.password,
             instagramPublicKeyId: instPublicKey.keyId,
             timestamp: timestampString
         )
@@ -109,7 +107,7 @@ class PostServiceThreads: PostService {
     
     // MARK: helpers
     
-    func getUserId() async throws -> Int {
+    private func getUserId() async throws -> Int {
         let url = "\(instagramApiUrl)/users/\(username!)/usernameinfo/"
         let request = AF.request(url, headers: headers)
         let response = try await request.serializingString().value
@@ -143,8 +141,8 @@ class PostServiceThreads: PostService {
 
         let params = [
             "client_input_params": [
-                "password": "#PWD_INSTAGRAM:4:\(timestamp):\(encryptedPassword)",
-                "contact_point": username,
+                "password": "#PWD_INSTAGRAM:0:\(timestamp):\(encryptedPassword)", // 4
+                "contact_point": username!,
                 "device_id": deviceId
             ],
             "server_params": [
@@ -175,9 +173,16 @@ class PostServiceThreads: PostService {
 
         do {
             let request = AF.request("\(instagramApiUrl)/bloks/apps/com.bloks.www.bloks.caa.login.async.send_login_request/", method: .post, parameters: parameters, headers: publicHeaders)
-            let dataTask = request.serializingDecodable(LoginResponse.self)
-            let value = try await dataTask.value
-            return value.loggedInUser.pk
+            let string = try await request.serializingString().value
+            let regex = try NSRegularExpression(pattern: #"Bearer\ IGT\:2\:(?<token>.*?\=)\\"#, options: [])
+            let range = NSRange(location: 0, length: string.count)
+            let match = regex.firstMatch(in: string, options: [], range: range)
+            guard
+                let tokenRange = match?.range(withName: "token")
+            else {
+                throw NSError(domain: "PostServiceThreads", code: 0, userInfo: [NSLocalizedDescriptionKey: "Can't find token"])
+            }
+            return (string as NSString).substring(with: tokenRange)
         } catch {
             print(Self.self, #function, #line, error, "\n")
             throw error
@@ -186,8 +191,8 @@ class PostServiceThreads: PostService {
     
     private func createDeviceHash() -> String {
         let string = String(format: "%f", Date().timeIntervalSince1970)
-        let hashString = dependencies.cryptoService.sha256(string: string, prefix: 16)
-        return "android-\(hashString)"
+        let hashString = dependencies.cryptoService.sha256(string: string, prefix: 8)
+        return "ios-\(hashString)"
     }
 }
 
@@ -205,14 +210,6 @@ struct UserInfo: Codable {
     let isPrivate: Bool
     let profilePicUrl: String
     let isVerified: Bool
-}
-
-fileprivate struct LoginResponse: Codable {
-    let loggedInUser: LoggedInUser
-    
-    struct LoggedInUser: Codable {
-        let pk: String
-    }
 }
 
 fileprivate struct ThreadParameters: Codable {

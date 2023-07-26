@@ -25,6 +25,7 @@ struct SettingsView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
+        .onAppear(perform: presenter.onAppear)
         .sheet(isPresented: $presenter.isLoginPresented) {
             LoginView(credentials: $presenter.credentials, onLoginTap: presenter.onLoginTap)
         }
