@@ -7,6 +7,14 @@
 
 import Foundation
 
+enum SettingsSheet: String, Identifiable {
+    case threadsLogin, telegramLogin
+    
+    var id: String {
+        rawValue
+    }
+}
+
 @MainActor
 protocol SettingsPresenter: AnyObservableObject {
     
@@ -14,17 +22,21 @@ protocol SettingsPresenter: AnyObservableObject {
     
     var credentials: Credentials { get set }
     
-    var isLoginPresented: Bool { get set }
+    var presentedSheet: SettingsSheet? { get set }
     
     var twitterUser: User? { get }
     
     var threadsUser: User? { get }
+    
+    var telegramUser: User? { get }
     
     func onAppear()
     
     func onAddTwitterTap()
     
     func onAddThreadsTap()
+    
+    func onAddTelegramTap()
     
     func onLoginTap()
 }
@@ -44,9 +56,10 @@ class SettingsPresenterImpl: SettingsPresenter, ObservableObject {
     
     @Published var isLoading: Bool = true
     @Published var credentials = Credentials(username: "", password: "")
-    @Published var isLoginPresented: Bool = false
+    @Published var presentedSheet: SettingsSheet?
     @Published var twitterUser: User?
     @Published var threadsUser: User?
+    @Published var telegramUser: User?
     
     func onAppear() {
         Task {
@@ -58,6 +71,9 @@ class SettingsPresenterImpl: SettingsPresenter, ObservableObject {
                 }
                 group.addTask {
                     await self.setThreadsUser(try? await self.dependencies.postServiceProvider.threadsService.user)
+                }
+                group.addTask {
+                    await self.setTelegramUser(try? await self.dependencies.postServiceProvider.telegramService.user)
                 }
             }
             
@@ -79,19 +95,26 @@ class SettingsPresenterImpl: SettingsPresenter, ObservableObject {
     
     func onAddThreadsTap() {
         credentials = Credentials(username: "", password: "")
-        isLoginPresented = true
+        presentedSheet = .threadsLogin
+    }
+    
+    func onAddTelegramTap() {
+        credentials = Credentials(username: "", password: "")
+        presentedSheet = .telegramLogin
     }
     
     func onLoginTap() {
         Task {
-            do {
-                // unofficial reverse-engineered api imitates the instagram app so credentials are required
-                try await dependencies.postServiceProvider.threadsService.login(credentials: credentials)
-                await setThreadsUser(try? await dependencies.postServiceProvider.threadsService.user)
-            } catch {
-                print(Self.self, #function, #line, error, "\n")
+            switch presentedSheet {
+            case .threadsLogin:
+                try await threadsLogin()
+            case .telegramLogin:
+                try await telegramLogin()
+            case nil:
+                break
             }
-            isLoginPresented = false
+            
+            presentedSheet = nil
             credentials = Credentials(username: "", password: "")
         }
     }
@@ -100,11 +123,25 @@ class SettingsPresenterImpl: SettingsPresenter, ObservableObject {
     
     private let dependencies: Dependencies
     
+    private func threadsLogin() async throws {
+        try await dependencies.postServiceProvider.threadsService.login(credentials: credentials)
+        await setThreadsUser(try? await dependencies.postServiceProvider.threadsService.user)
+    }
+    
+    private func telegramLogin() async throws {
+        try await dependencies.postServiceProvider.telegramService.login(credentials: credentials)
+        await setTelegramUser(try? await dependencies.postServiceProvider.telegramService.user)
+    }
+    
     private func setTwitterUser(_ user: User?) async {
         twitterUser = user
     }
     
     private func setThreadsUser(_ user: User?) async {
         threadsUser = user
+    }
+    
+    private func setTelegramUser(_ user: User?) async {
+        telegramUser = user
     }
 }

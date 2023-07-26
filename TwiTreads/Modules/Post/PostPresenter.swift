@@ -15,6 +15,8 @@ protocol PostPresenter: AnyObservableObject {
     
     var isThreadsOn: Bool { get set }
     
+    var isTelegramOn: Bool { get set }
+    
     func onPostTap()
 }
 
@@ -29,10 +31,9 @@ class PostPresenterImpl: PostPresenter, ObservableObject {
     }
     
     @Published var text: String = ""
-    
     @Published var isThreadsOn: Bool = true
-    
     @Published var isTwitterOn: Bool = true
+    @Published var isTelegramOn: Bool = true
     
     func onPostTap() {
         if isThreadsOn {
@@ -43,6 +44,11 @@ class PostPresenterImpl: PostPresenter, ObservableObject {
         if isTwitterOn {
             Task {
                 try? await dependencies.postServiceProvider.threadsService.post(message: text)
+            }
+        }
+        if isTelegramOn {
+            Task {
+                try? await dependencies.postServiceProvider.telegramService.post(message: text)
             }
         }
     }

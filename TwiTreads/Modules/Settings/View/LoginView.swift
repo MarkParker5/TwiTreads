@@ -10,23 +10,29 @@ import SwiftUI
 struct LoginView: View {
     
     @Binding var credentials: Credentials
+    var usernameTitle: String = "Username"
+    var passwordTitle: String = "Password"
+    var message: String = ""
     var onLoginTap: () -> Void
     
     var body: some View {
         VStack {
             Spacer()
             
-            TextField("Username", text: $credentials.username)
+            TextField(usernameTitle, text: $credentials.username)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 12)
                 .background(Color(.tertiarySystemBackground))
                 .cornerRadius(10)
             
-            SecureField("Password", text: $credentials.password)
+            SecureField(passwordTitle, text: $credentials.password)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 12)
                 .background(Color(.tertiarySystemBackground))
                 .cornerRadius(10)
+            
+            Text(message)
+                .padding()
             
             Button("Login", action: onLoginTap)
                 .padding()

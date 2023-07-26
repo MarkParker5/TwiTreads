@@ -14,6 +14,8 @@ protocol PostServiceProvider {
     var twitterService: PostService { get }
     
     var threadsService: PostService { get }
+    
+    var telegramService: PostService { get }
 }
 
 class PostServiceProviderImpl: PostServiceProvider {
@@ -21,6 +23,7 @@ class PostServiceProviderImpl: PostServiceProvider {
     struct Dependencies {
         var twitterService: PostService
         var threadsService: PostService
+        var telegramService: PostService
     }
     
     init(dependencies: Dependencies) {
@@ -35,6 +38,10 @@ class PostServiceProviderImpl: PostServiceProvider {
     
     var threadsService: PostService {
         dependencies.threadsService
+    }
+    
+    var telegramService: PostService {
+        dependencies.telegramService
     }
     
     // MARK: private

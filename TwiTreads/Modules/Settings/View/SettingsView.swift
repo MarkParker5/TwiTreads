@@ -30,7 +30,15 @@ struct SettingsView: View {
                     Text("Threads connected as @\(user.username)")
                         .padding()
                 } else {
-                    Button("Connect Threads", action: presenter.onAddThreadsTap)
+                    Button("Connect Threads\nusing Instagram credentials", action: presenter.onAddThreadsTap)
+                        .padding()
+                }
+                
+                if let user = presenter.telegramUser {
+                    Text("Telegram connected as \(user.username)")
+                        .padding()
+                } else {
+                    Button("Connect Telegram Channel", action: presenter.onAddTelegramTap)
                         .padding()
                 }
             }
@@ -38,9 +46,16 @@ struct SettingsView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
         .onAppear(perform: presenter.onAppear)
-        .sheet(isPresented: $presenter.isLoginPresented) {
-            LoginView(credentials: $presenter.credentials, onLoginTap: presenter.onLoginTap)
+        .sheet(item: $presenter.presentedSheet) { item in
+            LoginView(
+                credentials: $presenter.credentials,
+                usernameTitle: item == .telegramLogin ? "Channel name (with @)" : "Username",
+                passwordTitle: item == .telegramLogin ? "Bot token" : "Password",
+                message: item == .threadsLogin
+                ? "2FA is not supported yet, you need to disable it to use TwiTreads"
+                : "Create a bot using @BotFather, save the bot token and add the bot as an admin to your channel",
+                onLoginTap: presenter.onLoginTap
+            )
         }
     }
-    
 }

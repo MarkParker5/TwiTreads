@@ -27,7 +27,8 @@ final class AppCoordinatorImpl: AppCoordinator {
                     twitterService: PostServiceTwitter(),
                     threadsService: PostServiceThreads(dependencies: .init(
                         cryptoService: diContainer.resolve(type: CryptoService.self)
-                    ))
+                    )),
+                    telegramService: PostServiceTelegram()
                 )
             )
         )

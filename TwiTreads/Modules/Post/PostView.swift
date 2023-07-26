@@ -60,6 +60,8 @@ struct PostView: View {
                 
                 Toggle("Threads", isOn: $presenter.isThreadsOn)
                 
+                Toggle("Telegram", isOn: $presenter.isTelegramOn)
+                
                 Button("Post", action: presenter.onPostTap)
                     .padding(.vertical)
             }
@@ -75,6 +77,7 @@ struct PostView_Previews: PreviewProvider {
         var text: String = ""
         var isTwitterOn: Bool = true
         var isThreadsOn: Bool = true
+        var isTelegramOn: Bool = true
         func onPostTap() {}
     }
     

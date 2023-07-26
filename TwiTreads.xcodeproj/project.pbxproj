@@ -12,6 +12,7 @@
 		8F4ED8962A5D4C6B00975BE9 /* PostServiceThreads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED8952A5D4C6B00975BE9 /* PostServiceThreads.swift */; };
 		8F4ED89A2A5D4CA600975BE9 /* PostServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED8992A5D4CA600975BE9 /* PostServiceProvider.swift */; };
 		8F4ED89C2A5D4CBF00975BE9 /* PostServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */; };
+		8F54DAF22A71986000D06305 /* PostServiceTelegram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54DAF12A71986000D06305 /* PostServiceTelegram.swift */; };
 		8F7470CB2A5E9C040070201D /* TwitterAPIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7470CA2A5E9C040070201D /* TwitterAPIKit */; };
 		8F7470CD2A5E9E4D0070201D /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7470CC2A5E9E4D0070201D /* UserDefault.swift */; };
 		8F7470E62A5EADCB0070201D /* InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7470E52A5EADCB0070201D /* InfoPlist.swift */; };
@@ -63,6 +64,7 @@
 		8F4ED8952A5D4C6B00975BE9 /* PostServiceThreads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceThreads.swift; sourceTree = "<group>"; };
 		8F4ED8992A5D4CA600975BE9 /* PostServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceProvider.swift; sourceTree = "<group>"; };
 		8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceMock.swift; sourceTree = "<group>"; };
+		8F54DAF12A71986000D06305 /* PostServiceTelegram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceTelegram.swift; sourceTree = "<group>"; };
 		8F7470CC2A5E9E4D0070201D /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		8F7470D92A5EA6EC0070201D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8F7470E32A5EACD70070201D /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				8F4ED8932A5D4C6400975BE9 /* PostServiceTwitter.swift */,
 				8F4ED8952A5D4C6B00975BE9 /* PostServiceThreads.swift */,
 				8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */,
+				8F54DAF12A71986000D06305 /* PostServiceTelegram.swift */,
 			);
 			path = PostService;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				8FF75B2B2A6A90CF0081DA5F /* LoginView.swift in Sources */,
 				8FD74D782A5D359100899983 /* TwiTreadsApp.swift in Sources */,
 				8F4ED89A2A5D4CA600975BE9 /* PostServiceProvider.swift in Sources */,
+				8F54DAF22A71986000D06305 /* PostServiceTelegram.swift in Sources */,
 				8F4ED8962A5D4C6B00975BE9 /* PostServiceThreads.swift in Sources */,
 				8FD74DCC2A5D447C00899983 /* SettingsView.swift in Sources */,
 				8FD74DC62A5D446800899983 /* PostPresenter.swift in Sources */,
