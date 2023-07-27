@@ -20,6 +20,8 @@ final class AppCoordinatorImpl: AppCoordinator {
     init() {
         diContainer.register(type: CryptoService.self, component: CryptoServiceImpl())
         
+        diContainer.register(type: TranslateService.self, component: TranslateServiceImpl())
+        
         diContainer.register(
             type: PostServiceProvider.self,
             component: PostServiceProviderImpl(
@@ -35,7 +37,7 @@ final class AppCoordinatorImpl: AppCoordinator {
         
         NetworkActivityLogger.shared.level = .debug
         NetworkActivityLogger.shared.startLogging()
-//        NetworkActivityLogger.shared.stopLogging()
+        NetworkActivityLogger.shared.stopLogging()
     }
     
     // MARK: AppCoordinator

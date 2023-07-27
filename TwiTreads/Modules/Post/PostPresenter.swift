@@ -35,6 +35,7 @@ class PostPresenterImpl: PostPresenter, ObservableObject {
     
     struct Dependencies {
         let postServiceProvider: PostServiceProvider
+        let translateService: TranslateService
     }
     
     init(dependencies: Dependencies) {
@@ -47,11 +48,14 @@ class PostPresenterImpl: PostPresenter, ObservableObject {
             translate()
         }.store(in: &bag)
         
+        $selectedLanguageCode.receive(on: DispatchQueue.main).sink { [unowned self] code in
+            defaults.selectedLanguageCode = code
+            translate()
+        }.store(in: &bag)
+        
         $isTranslateOn.receive(on: DispatchQueue.main).sink { [unowned self] isOn in
             defaults.isTranslateOn = isOn
-            if isOn {
-                translate()
-            }
+            translate()
         }.store(in: &bag)
         
         $isTwitterOn.receive(on: DispatchQueue.main).sink { [unowned self] isOn in
@@ -68,9 +72,9 @@ class PostPresenterImpl: PostPresenter, ObservableObject {
         
         // defaults
         
-        isTranslateOn = defaults.isTranslateOn
         text = defaults.text ?? ""
         selectedLanguageCode = defaults.selectedLanguageCode ?? selectedLanguageCode
+        isTranslateOn = defaults.isTranslateOn
         isTwitterOn = defaults.isTwitterOn
         isThreadsOn = defaults.isThreadsOn
         isTelegramOn = defaults.isTelegramOn
@@ -78,8 +82,11 @@ class PostPresenterImpl: PostPresenter, ObservableObject {
         // tasks
         
         Task {
-//            await updateLanguages(try await dependencies.postServiceProvider.translateService.supportedLanguages)
-            await updateLanguages([.english, .english, .english, .english, .english])
+            do {
+                await updateLanguages(try await dependencies.translateService.languages)
+            } catch {
+                print(Self.self, #function, #line, error, "\n")
+            }
             translate()
         }
     }
@@ -130,11 +137,15 @@ class PostPresenterImpl: PostPresenter, ObservableObject {
     private func translate() {
         guard isTranslateOn else { return }
         Task {
-//            let translated = try? await dependencies.postServiceProvider.translateService.translate(
-//                text: text,
-//                to: selectedLanguage
-//            )
-            await updateTranslation(string: text)// ?? "")
+            do {
+                let translated = try await dependencies.translateService.translate(
+                    text: text,
+                    to: selectedLanguage
+                )
+                await updateTranslation(string: translated ?? "")
+            } catch {
+                print(Self.self, #function, #line, error, "\n")
+            }
         }
     }
     

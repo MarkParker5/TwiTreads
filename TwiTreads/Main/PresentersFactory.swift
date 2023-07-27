@@ -35,7 +35,8 @@ final class PresentersFactoryImpl: PresentersFactory {
     
     func postPresenter() -> PostPresenter {
         PostPresenterImpl(dependencies: .init(
-            postServiceProvider: diContainer.resolve(type: PostServiceProvider.self)
+            postServiceProvider: diContainer.resolve(type: PostServiceProvider.self),
+            translateService: diContainer.resolve(type: TranslateService.self)
         ))
     }
     

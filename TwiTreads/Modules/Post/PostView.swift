@@ -86,7 +86,7 @@ struct PostView: View {
     private var languages: some View {
         Menu {
             ForEach(presenter.languages) { language in
-                Button("Language") {
+                Button(language.name) {
                     presenter.onLanguageTap(language)
                 }
             }
