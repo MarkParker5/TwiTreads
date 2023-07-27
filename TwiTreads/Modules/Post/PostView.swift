@@ -32,7 +32,7 @@ struct PostView: View {
         HStack {
             
             Button("Cancel") {
-                isFocused = false
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) // TODO: to presenter
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading)

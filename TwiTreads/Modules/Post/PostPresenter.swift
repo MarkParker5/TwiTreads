@@ -107,19 +107,31 @@ class PostPresenterImpl: PostPresenter, ObservableObject {
     func onPostTap() {
         let text = isTranslateOn ? translatedText : text
         
-        if isThreadsOn {
-            Task {
-                try? await dependencies.postServiceProvider.twitterService.post(message: text)
-            }
-        }
         if isTwitterOn {
             Task {
-                try? await dependencies.postServiceProvider.threadsService.post(message: text)
+                do {
+                    try await dependencies.postServiceProvider.twitterService.post(message: text)
+                } catch {
+                    print(Self.self, #function, #line, error, "\n")
+                }
+            }
+        }
+        if isThreadsOn {
+            Task {
+                do {
+                    try await dependencies.postServiceProvider.threadsService.post(message: text)
+                } catch {
+                    print(Self.self, #function, #line, error, "\n")
+                }
             }
         }
         if isTelegramOn {
             Task {
-                try? await dependencies.postServiceProvider.telegramService.post(message: text)
+                do {
+                    try await dependencies.postServiceProvider.telegramService.post(message: text)
+                } catch {
+                    print(Self.self, #function, #line, error, "\n")
+                }
             }
         }
     }
