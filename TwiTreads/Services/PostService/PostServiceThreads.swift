@@ -102,21 +102,28 @@ class PostServiceThreads: PostService {
         return response
     }
     
-    @discardableResult
-    private func createThread(caption: String, url: String? = nil, imageUrl: String? = nil, replyTo: Int? = nil) async throws -> Thread {
-        let parameters = ThreadParameters(caption: caption, url: url, imageUrl: imageUrl, replyTo: replyTo)
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        let requestData = try encoder.encode(parameters)
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+//    @discardableResult
+    private func createThread(caption: String, url: String? = nil, imageUrl: String? = nil, replyTo: Int? = nil) async throws { //} -> Thread {
+        guard let userId else { return }
+        let parameters = [
+            "text_post_app_info": [
+                "reply_control": 0,
+            ],
+            "timezone_offset": "0",
+            "source_type": "4",
+            "caption": caption,
+            "_uid": userId,
+            "device_id": deviceId,
+            "upload_id": String(Int(Date().timeIntervalSince1970)),
+//            "device": [],
+        ] as [String: Any]
         let response = try await AF.request(
             "\(instagramApiUrl)/media/configure_text_only_post/",
             method: .post,
-            parameters: requestData,
+            parameters: parameters,
             headers: headers
-        ).serializingDecodable(Thread.self, decoder: decoder).value
-        return response
+        ).serializingData().value//.serializingDecodable(Thread.self, decoder: decoder).value
+//        return response
     }
     
     // MARK: helpers
@@ -234,16 +241,16 @@ fileprivate struct UserInfo: Codable {
     }
 }
 
-fileprivate struct ThreadParameters: Codable {
-    let caption: String
-    let url: String?
-    let imageUrl: String?
-    let replyTo: Int?
-}
+//fileprivate struct ThreadParameters: Codable {
+//    let caption: String
+//    let url: String?
+//    let imageUrl: String?
+//    let replyTo: Int?
+//}
 
-fileprivate struct Thread: Codable {
-    let threadId: String
-    let threadTitle: String
-    let threadType: String
-    let users: [UserInfo]
-}
+//fileprivate struct Thread: Codable {
+//    let threadId: String
+//    let threadTitle: String
+//    let threadType: String
+//    let users: [UserInfo]
+//}

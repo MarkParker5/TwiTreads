@@ -41,7 +41,7 @@ class TabBarPresenterImpl: TabBarPresenter, ObservableObject {
     
     // MARK: TabBarPresenter
     
-    @Published var selectedTab: TabBarScreen = .feed
+    @Published var selectedTab: TabBarScreen = .post
     
     var feedPresenter: FeedPresenter {
         dependencies.getFeedPresenter()

@@ -90,7 +90,7 @@ class PostServiceTwitter: PostService {
         try await refresh()
         guard let token else { return }
         let client = TwitterAPIClient(.bearer(token.accessToken))
-        let response = await client.v2.tweet.postTweet(PostTweetsRequestV2(text: message)).responseObject
+        let response = await client.v2.tweet.postTweet(PostTweetsRequestV2(replySettings: .everyone, text: message)).responseObject
         print(response)
     }
     

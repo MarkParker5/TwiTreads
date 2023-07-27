@@ -35,7 +35,7 @@ final class AppCoordinatorImpl: AppCoordinator {
         
         NetworkActivityLogger.shared.level = .debug
         NetworkActivityLogger.shared.startLogging()
-        NetworkActivityLogger.shared.stopLogging()
+//        NetworkActivityLogger.shared.stopLogging()
     }
     
     // MARK: AppCoordinator
