@@ -16,6 +16,9 @@ class PostServiceThreads: PostService {
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
+        Task {
+            userId = try await getUserId()
+        }
     }
     
     // MARK: PostService
@@ -106,24 +109,24 @@ class PostServiceThreads: PostService {
     private func createThread(caption: String, url: String? = nil, imageUrl: String? = nil, replyTo: Int? = nil) async throws { //} -> Thread {
         guard let userId else { return }
         let parameters = [
-            "text_post_app_info": [
-                "reply_control": 0,
-            ],
+            "text_post_app_info": "{\"reply_control\":0}",
+            "publish_mode": "text_post",
             "timezone_offset": "0",
             "source_type": "4",
             "caption": caption,
-            "_uid": userId,
+            "_uid": String(userId),
             "device_id": deviceId,
             "upload_id": String(Int(Date().timeIntervalSince1970)),
-//            "device": [],
-        ] as [String: Any]
-        let response = try await AF.request(
+        ] as [String: String]
+        
+        let parametersString = "SIGNATURE." + String(data: try JSONEncoder().encode(parameters), encoding: .utf8)!
+        
+        _ = try await AF.request(
             "\(instagramApiUrl)/media/configure_text_only_post/",
             method: .post,
-            parameters: parameters,
+            parameters: ["signed_body": parametersString],
             headers: headers
         ).serializingData().value//.serializingDecodable(Thread.self, decoder: decoder).value
-//        return response
     }
     
     // MARK: helpers
@@ -240,17 +243,3 @@ fileprivate struct UserInfo: Codable {
         let profilePicUrl: URL
     }
 }
-
-//fileprivate struct ThreadParameters: Codable {
-//    let caption: String
-//    let url: String?
-//    let imageUrl: String?
-//    let replyTo: Int?
-//}
-
-//fileprivate struct Thread: Codable {
-//    let threadId: String
-//    let threadTitle: String
-//    let threadType: String
-//    let users: [UserInfo]
-//}
