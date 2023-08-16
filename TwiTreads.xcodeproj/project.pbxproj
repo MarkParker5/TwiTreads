@@ -13,11 +13,11 @@
 		8F4ED89A2A5D4CA600975BE9 /* PostServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED8992A5D4CA600975BE9 /* PostServiceProvider.swift */; };
 		8F4ED89C2A5D4CBF00975BE9 /* PostServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */; };
 		8F54DAF22A71986000D06305 /* PostServiceTelegram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54DAF12A71986000D06305 /* PostServiceTelegram.swift */; };
-		8F54DAF42A729A2B00D06305 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54DAF32A729A2B00D06305 /* Language.swift */; };
 		8F54DAF72A72D73900D06305 /* TranslateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F54DAF62A72D73900D06305 /* TranslateService.swift */; };
 		8F7470CB2A5E9C040070201D /* TwitterAPIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7470CA2A5E9C040070201D /* TwitterAPIKit */; };
 		8F7470CD2A5E9E4D0070201D /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7470CC2A5E9E4D0070201D /* UserDefault.swift */; };
 		8F7470E62A5EADCB0070201D /* InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7470E52A5EADCB0070201D /* InfoPlist.swift */; };
+		8F7982A32A8C750F00C3172F /* SwiftyTranslate in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7982A22A8C750F00C3172F /* SwiftyTranslate */; };
 		8FD74D782A5D359100899983 /* TwiTreadsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD74D772A5D359100899983 /* TwiTreadsApp.swift */; };
 		8FD74D7C2A5D359100899983 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FD74D7B2A5D359100899983 /* Assets.xcassets */; };
 		8FD74D802A5D359100899983 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FD74D7F2A5D359100899983 /* Preview Assets.xcassets */; };
@@ -67,7 +67,6 @@
 		8F4ED8992A5D4CA600975BE9 /* PostServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceProvider.swift; sourceTree = "<group>"; };
 		8F4ED89B2A5D4CBF00975BE9 /* PostServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceMock.swift; sourceTree = "<group>"; };
 		8F54DAF12A71986000D06305 /* PostServiceTelegram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceTelegram.swift; sourceTree = "<group>"; };
-		8F54DAF32A729A2B00D06305 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		8F54DAF62A72D73900D06305 /* TranslateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateService.swift; sourceTree = "<group>"; };
 		8F7470CC2A5E9E4D0070201D /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		8F7470D92A5EA6EC0070201D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -106,6 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF75B212A6A7B4E0081DA5F /* Alamofire in Frameworks */,
+				8F7982A32A8C750F00C3172F /* SwiftyTranslate in Frameworks */,
 				8FF75B2E2A6A957F0081DA5F /* AlamofireNetworkActivityLogger in Frameworks */,
 				8F7470CB2A5E9C040070201D /* TwitterAPIKit in Frameworks */,
 				8FF75B362A6AAA830081DA5F /* SwiftyRSA in Frameworks */,
@@ -289,7 +289,6 @@
 			children = (
 				8FF75B222A6A7BE90081DA5F /* User.swift */,
 				8FF75B242A6A7C1E0081DA5F /* Credentials.swift */,
-				8F54DAF32A729A2B00D06305 /* Language.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -334,6 +333,7 @@
 				8FF75B202A6A7B4E0081DA5F /* Alamofire */,
 				8FF75B2D2A6A957F0081DA5F /* AlamofireNetworkActivityLogger */,
 				8FF75B352A6AAA830081DA5F /* SwiftyRSA */,
+				8F7982A22A8C750F00C3172F /* SwiftyTranslate */,
 			);
 			productName = TwiTreads;
 			productReference = 8FD74D742A5D359100899983 /* TwiTreads.app */;
@@ -369,6 +369,7 @@
 				8FF75B1F2A6A7B4E0081DA5F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				8FF75B2C2A6A957F0081DA5F /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
 				8FF75B342A6AAA830081DA5F /* XCRemoteSwiftPackageReference "SwiftyRSA" */,
+				8F7982A12A8C750F00C3172F /* XCRemoteSwiftPackageReference "SwiftyTranslate" */,
 			);
 			productRefGroup = 8FD74D752A5D359100899983 /* Products */;
 			projectDirPath = "";
@@ -414,7 +415,6 @@
 				8F4ED8962A5D4C6B00975BE9 /* PostServiceThreads.swift in Sources */,
 				8FD74DCC2A5D447C00899983 /* SettingsView.swift in Sources */,
 				8FD74DC62A5D446800899983 /* PostPresenter.swift in Sources */,
-				8F54DAF42A729A2B00D06305 /* Language.swift in Sources */,
 				8FD74DC02A5D435B00899983 /* TabBarPresenter.swift in Sources */,
 				8FD74DAF2A5D374B00899983 /* DIContainer.swift in Sources */,
 				8FD74DAD2A5D374500899983 /* PresentersFactory.swift in Sources */,
@@ -563,6 +563,14 @@
 				minimumVersion = 0.2.3;
 			};
 		};
+		8F7982A12A8C750F00C3172F /* XCRemoteSwiftPackageReference "SwiftyTranslate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MarkParker5/SwiftyTranslate";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		8FD74DB92A5D412600899983 /* XCRemoteSwiftPackageReference "AnyObservableObject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MarkParker5/AnyObservableObject";
@@ -602,6 +610,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8F7470C92A5E9C040070201D /* XCRemoteSwiftPackageReference "TwitterAPIKit" */;
 			productName = TwitterAPIKit;
+		};
+		8F7982A22A8C750F00C3172F /* SwiftyTranslate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7982A12A8C750F00C3172F /* XCRemoteSwiftPackageReference "SwiftyTranslate" */;
+			productName = SwiftyTranslate;
 		};
 		8FD74DBA2A5D412600899983 /* AnyObservableObject */ = {
 			isa = XCSwiftPackageProductDependency;

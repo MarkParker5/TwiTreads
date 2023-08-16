@@ -7,6 +7,7 @@
 
 import Foundation
 import AlamofireNetworkActivityLogger
+import SwiftyTranslate
 
 protocol AppCoordinator {
     
@@ -20,7 +21,7 @@ final class AppCoordinatorImpl: AppCoordinator {
     init() {
         diContainer.register(type: CryptoService.self, component: CryptoServiceImpl())
         
-        diContainer.register(type: TranslateService.self, component: TranslateServiceImpl())
+        diContainer.register(type: TranslateService.self, component: SwiftyTranslate())
         
         diContainer.register(
             type: PostServiceProvider.self,
