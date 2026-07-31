@@ -8,7 +8,6 @@
     <img
       alt="A Mark Parker project — see more at markparker.me"
       src="https://markparker.me/banners/flagship-light.webp"
-      width="900"
     />
   </picture>
 </a>
